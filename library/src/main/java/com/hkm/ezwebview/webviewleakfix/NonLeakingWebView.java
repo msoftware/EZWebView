@@ -11,9 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * see http://stackoverflow.com/questions/3130654/memory-leak-in-webview and http://code.google.com/p/android/issues/detail?id=9375
  * Note that the bug does NOT appear to be fixed in android 2.2 as romain claims
- * <p/>
  * Also, you must call {@link #destroy()} from your activity's onDestroy method.
- * <p/>
  * Author Heskeyo Kam
  */
 

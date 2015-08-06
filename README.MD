@@ -4,6 +4,16 @@ Advanced Webview
 
 For initiating a webview, simply thing to do this to do it once for all.
 
+Remote Repo
+```gradle
+    repositories {
+        maven { url "http://dl.bintray.com/jjhesk/maven" }
+    }
+```
+Dependency
+```gradle
+    compile 'com.android.support:appcompat-v7:22.2.0'
+```
 
 This is the fast simple implementation without any callbacks:
 

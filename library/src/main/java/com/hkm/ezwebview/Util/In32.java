@@ -8,8 +8,6 @@ import android.support.annotation.RawRes;
 
 import com.hkm.ezwebview.R;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.Scanner;
 
 /**
@@ -26,6 +24,7 @@ public class In32 {
      * @param packageName the package application id
      * @param url         the url to start from
      * @param title       the title to send as extra information
+     * @param activity    the activity
      */
     public static void startNewActivity(final String packageName, final String url, final String title, final Context activity) {
         Intent intent = activity.getPackageManager().getLaunchIntentForPackage(packageName);
@@ -57,8 +56,9 @@ public class In32 {
     /**
      * enable css framework from the css file setup
      *
-     * @param ctx the context from the resources
-     * @return the string
+     * @param ctx                    the context from the resources
+     * @param resource_raw_file_name the file
+     * @return he string
      */
     private static String cssframework(Context ctx, final @RawRes int resource_raw_file_name) {
         StringBuilder sb = new StringBuilder();
