@@ -20,7 +20,7 @@ Remote Repo
 ```
 Dependency
 ```gradle
-    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.hkm.ezwebview:library:1.0.0'
 ```
 
 This is the fast simple implementation without any callbacks:
