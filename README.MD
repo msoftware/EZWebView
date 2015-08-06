@@ -1,6 +1,14 @@
 Advanced Webview
 =====
 
+Feature list
+- [x] no more memory leak
+- [x] easy web page margin fixed
+- [x] easy web video implementation
+- [x] easy web content display implementation
+- [x] took care of life cycle issues
+- [x] fantasy animation reveal fade in
+
 
 For initiating a webview, simply thing to do this to do it once for all.
 
