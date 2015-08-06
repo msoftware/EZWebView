@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:capp="http://schemas.android.com/apk/res-auto"
+    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:id="@+id/framer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ripple_material_dark">
+
+    <!--    tool:ignore="WebViewLayout"-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ScrollView
+            android:id="@+id/scroller_container"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.99">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/framevideoplayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@color/pink_300"
+                    android:padding="1dp"
+                    android:visibility="gone">
+
+                    <com.hkm.ezwebview.webviewleakfix.NonLeakingWebView
+                        android:id="@+id/videoplayer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@color/pink_300"
+                        android:visibility="gone" />
+
+                    <com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar xmlns:fab="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/progressloadingbarpx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        fab:mlpb_enable_circle_background="true"
+                        fab:mlpb_inner_radius="18dp"
+                        fab:mlpb_progress_color="@color/pink_a400"
+                        fab:mlpb_show_arrow="false" />
+                </RelativeLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+                <!-- brand and title
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"
+                 -->
+                <com.neopixl.pixlui.components.textview.TextView
+                    android:id="@+id/article_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:maxLines="4"
+                    android:textSize="21sp"
+                    pixlui:typeface="oswald.regular.ttf" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+                <com.neopixl.pixlui.components.textview.TextView
+                    android:id="@+id/content_block_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autoLink="all"
+                    android:textColor="@color/pink_a400"
+                    android:textColorLink="@color/purple_400"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    pixlui:typeface="HelveticaNeue.ttf" />
+
+                <RelativeLayout
+                    android:id="@+id/content_article_frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:visibility="gone">
+
+                    <com.hkm.ezwebview.webviewleakfix.NonLeakingWebView
+                        android:id="@+id/content_block"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        tool:ignore="WebViewLayout" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressc"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>

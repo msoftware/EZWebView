@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PINK -->
+    <color name="pink_50">#fce4ec</color>
+    <color name="pink_100">#f8bbd0</color>
+    <color name="pink_200">#f48fb1</color>
+    <color name="pink_300">#f06292</color>
+    <color name="pink_400">#ec407a</color>
+    <color name="pink_500">#e91e63</color>
+    <color name="pink_600">#d81b60</color>
+    <color name="pink_700">#c2185b</color>
+    <color name="pink_800">#ad1457</color>
+    <color name="pink_900">#880e4f</color>
+    <color name="pink_a100">#ff80ab</color>
+    <color name="pink_a200">#ff4081</color>
+    <color name="pink_a400">#f50057</color>
+    <color name="pink_a700">#c51162</color>
+
+    <!-- PURPLE -->
+    <color name="purple_50">#f3e5f5</color>
+    <color name="purple_100">#e1bee7</color>
+    <color name="purple_200">#cd93d8</color>
+    <color name="purple_300">#ba68c8</color>
+    <color name="purple_400">#ab47bc</color>
+    <color name="purple_500">#9c27b0</color>
+    <color name="purple_600">#8e24aa</color>
+    <color name="purple_700">#7b1fa2</color>
+    <color name="purple_800">#6a1b9a</color>
+    <color name="purple_900">#4a148c</color>
+    <color name="purple_a100">#ea80fc</color>
+    <color name="purple_a200">#e040fb</color>
+    <color name="purple_a400">#d500f9</color>
+    <color name="purple_a700">#aa00ff</color>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="wv_simple_frame" type="id" />
+    <item name="wv_content_block" type="id" />
+    <item name="wv_simple_process" type="id" />
+</resources>
