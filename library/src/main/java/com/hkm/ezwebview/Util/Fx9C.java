@@ -88,6 +88,16 @@ public class Fx9C {
         setup_content_block_wb(context, frame_holder, block, codeing, 1500, c, null);
     }
 
+
+    public static <T> void setup_content_block_wb(
+            final T context,
+            final RelativeLayout frame_holder,
+            final NonLeakingWebView block,
+            final String codeing
+    ) throws Exception {
+        setup_content_block_wb(context, frame_holder, block, codeing, 1500, null, null);
+    }
+
     public static <T> void setup_content_block_wb(
             final T context,
             final RelativeLayout frame_holder,
@@ -131,7 +141,10 @@ public class Fx9C {
             final HClient.Callback c,
             final Runnable callback_webview) throws Exception {
         final String cs = In32.cssByContentPost(with(context)) + codeing;
-        block.setWebViewClient(HClient.with(context, block).setController(c));
+        HClient I2 = HClient.with(context, block);
+        if (c != null) I2.setController(c);
+        block.setWebViewClient(I2);
+        block.setWebViewClient(I2);
         block.loadDataWithBaseURL("", cs, "text/html; charset=utf-8", "UTF-8", null);
         block.setVisibility(View.VISIBLE);
         if (callback_webview == null)
@@ -153,7 +166,9 @@ public class Fx9C {
         mVideo.setWebChromeClient(new ChromeLoader(circlebar));
         mVideo.getSettings().setPluginState(WebSettings.PluginState.ON);
         mVideo.getSettings().setPluginState(WebSettings.PluginState.ON_DEMAND);
-        mVideo.setWebViewClient(HClient.with(context, mVideo).setController(c));
+        HClient I2 = HClient.with(context, mVideo);
+        if (c != null) I2.setController(c);
+        mVideo.setWebViewClient(I2);
         mVideo.getSettings().setJavaScriptEnabled(true);
         mVideo.loadDataWithBaseURL("", embeded_code, "text/html; charset=utf-8", "UTF-8", null);
         mVideo.setVisibility(View.VISIBLE);
