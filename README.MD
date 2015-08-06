@@ -4,6 +4,28 @@ Advanced Webview
 
 For initiating a webview, simply thing to do this to do it once for all.
 
+
+This is the fast simple implementation without any callbacks:
+
+```java
+
+  @Override
+    public void onViewCreated(View v, Bundle b) {
+        initBinding(v);
+        final String contentc = fromFileRaw(getActivity(), R.raw.sample_html);
+        try {
+            Fx9C.setup_content_block_wb(this, content_article_frame, block, contentc);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // if (bloadlistenr != null)
+        //   bloadlistenr.onLoad();
+    }
+
+```
+
+This is the advanced implementation:
+
 ```java
 
 
