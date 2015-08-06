@@ -65,7 +65,7 @@ public class basicWVIFragment extends Fragment {
         initBinding(v);
         final String contentc = getString(R.string.demo_html_content);
         try {
-            Fx9C.setup_content_block_wb(this, content_article_frame, block, contentc, new HClient.control() {
+            Fx9C.setup_content_block_wb(this, content_article_frame, block, contentc, new HClient.Callback() {
                 @Override
                 public void startNewActivity(String packagename, String url, String brandname, Context context) {
 

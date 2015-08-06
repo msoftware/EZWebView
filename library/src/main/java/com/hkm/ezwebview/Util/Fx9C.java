@@ -83,7 +83,7 @@ public class Fx9C {
             final RelativeLayout frame_holder,
             final NonLeakingWebView block,
             final String codeing,
-            final HClient.control c
+            final HClient.Callback c
     ) throws Exception {
         setup_content_block_wb(context, frame_holder, block, codeing, 1500, c);
     }
@@ -94,7 +94,7 @@ public class Fx9C {
             final NonLeakingWebView block,
             final CircleProgressBar circlebar,
             final String codeing,
-            final HClient.control c
+            final HClient.Callback c
     ) throws Exception {
         setup_web_video(context, frame_holder, block, circlebar, codeing, 2000, c);
     }
@@ -105,7 +105,7 @@ public class Fx9C {
             final NonLeakingWebView block,
             final String codeing,
             final int reveal_time,
-            final HClient.control c) throws Exception {
+            final HClient.Callback c) throws Exception {
         final String cs = In32.cssByContentPost(with(context)) + codeing;
         block.setWebViewClient(HClient.with(context, block).setController(c));
         block.loadDataWithBaseURL("", cs, "text/html; charset=utf-8", "UTF-8", null);
@@ -119,7 +119,7 @@ public class Fx9C {
             final NonLeakingWebView mVideo,
             final CircleProgressBar circlebar,
             final String codeing, final int reveal_time,
-            final HClient.control c) throws Exception {
+            final HClient.Callback c) throws Exception {
         final String embeded_code = In32.cssByVideo(with(context)) + codeing;
         mVideo.setWebChromeClient(new ChromeLoader(circlebar));
         mVideo.getSettings().setPluginState(WebSettings.PluginState.ON);

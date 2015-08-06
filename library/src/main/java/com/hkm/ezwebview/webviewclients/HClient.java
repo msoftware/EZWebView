@@ -10,7 +10,7 @@ import android.webkit.WebView;
  * Created by hesk on 6/8/15.
  */
 public class HClient extends HBClient {
-    public interface control {
+    public interface Callback {
         void startNewActivity(String packagename, String url, String brandname, Context context);
 
         void startFeedList(String url, Context context);
@@ -40,9 +40,9 @@ public class HClient extends HBClient {
         throw new Exception("please enter an activity or fragment");
     }
 
-    private control mc;
+    private Callback mc;
 
-    public HClient setController(control mc) {
+    public HClient setController(Callback mc) {
         this.mc = mc;
         return this;
     }
