@@ -9,6 +9,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.hkm.ezwebview.Util.In32;
 import com.hkm.ezwebview.webviewleakfix.PreventLeakClient;
 
 import org.apache.http.cookie.Cookie;
@@ -52,6 +53,8 @@ public abstract class HBCart extends PreventLeakClient<Activity> {
 
     protected abstract void triggerNative(final Uri trigger_url);
 
+    protected abstract boolean interceptUrl(WebView view, String url);
+
     @Override
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
         //    Toast.makeText(activity, "Oh no! " + description, Toast.LENGTH_SHORT).show();
@@ -64,21 +67,12 @@ public abstract class HBCart extends PreventLeakClient<Activity> {
         if (!loadingFinished) {
             redirect = true;
         }
-        Log.d(TAG, "client url:" + urlNewString);
-        for (final String url : allowing) {
-            if (urlNewString.startsWith(url)) {
-                loadingFinished = false;
-                mWebView.loadUrl(urlNewString);
-                return false;
-            }
+        boolean h = interceptUrl(view, urlNewString);
+        if (!h) {
+            loadingFinished = false;
+            //view.loadUrl(urlNewString);
         }
-        for (final String url : startfrom) {
-            if (urlNewString.startsWith(url)) {
-                triggerNative(Uri.parse(url));
-                return true;
-            }
-        }
-        return true;
+        return h;
     }
 
 

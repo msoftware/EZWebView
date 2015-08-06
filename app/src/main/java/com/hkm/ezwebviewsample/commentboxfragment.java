@@ -40,6 +40,9 @@ public class commentboxfragment extends WebviewCommentBox {
         //  url_id = getArguments().getString(COMMENT_BOX_ID);
         initBinding(view);
         setup_commentbox(getArguments().getString(COMMENT_BOX_ID));
+
+
+
     }
 
     public void complete() {

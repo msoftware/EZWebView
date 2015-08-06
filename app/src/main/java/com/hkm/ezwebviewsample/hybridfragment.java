@@ -1,55 +1,64 @@
-package com.hkm.ezwebview.app;
+package com.hkm.ezwebviewsample;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Fragment;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.RelativeLayout;
 
-import com.hkm.ezwebview.R;
-import com.hkm.ezwebview.Util.CommentBoxUrl;
 import com.hkm.ezwebview.Util.Fx9C;
 import com.hkm.ezwebview.Util.In32;
-import com.hkm.ezwebview.webviewclients.ChromeLoader;
-import com.hkm.ezwebview.webviewclients.FBClient;
+import com.hkm.ezwebview.app.WebviewCommentBox;
+import com.hkm.ezwebview.webviewclients.URLClient;
 import com.hkm.ezwebview.webviewleakfix.NonLeakingWebView;
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Created by hesk on 23/7/15.
+ * Created by hesk on 6/8/15.
  */
-public class WebviewCommentBox extends Fragment {
-    public static final String
-            FRAGMENTTITLE_RESID = "title_resid",
-            COMMENT_BOX_ID = "comment_box_identification",
-            REQUEST_TYPE = "request_type";
-    public static final int FB_COMMENT = 9019;
-    public static final int SINA_COMMENT = 9016;
+public class hybridfragment extends Fragment implements URLClient.cb {
 
 
     private NonLeakingWebView block;
     private CircleProgressBar betterCircleBar;
     private RelativeLayout framer;
 
+    private List<String> getInternal() {
+        final List<String> h = new ArrayList<>();
+
+        return h;
+    }
+
+    private List<String> getAllow() {
+        final List<String> h = new ArrayList<>();
+        h.add("techcrunch.com");
+        h.add("google.com");
+        h.add("google.com.hk");
+        return h;
+    }
+
     protected int commentbox_layout_id() {
-        return R.layout.webviewsimple;
+        return com.hkm.ezwebview.R.layout.webviewsimple;
     }
 
 
     @SuppressLint("ResourceAsColor")
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     protected void initBinding(View v) {
-        betterCircleBar = (CircleProgressBar) v.findViewById(R.id.wv_simple_process);
-        block = (NonLeakingWebView) v.findViewById(R.id.wv_content_block);
-        framer = (RelativeLayout) v.findViewById(R.id.wv_simple_frame);
+        betterCircleBar = (CircleProgressBar) v.findViewById(com.hkm.ezwebview.R.id.wv_simple_process);
+        block = (NonLeakingWebView) v.findViewById(com.hkm.ezwebview.R.id.wv_content_block);
+        framer = (RelativeLayout) v.findViewById(com.hkm.ezwebview.R.id.wv_simple_frame);
     }
 
     private void killWebView(NonLeakingWebView mWebView) {
@@ -59,7 +68,6 @@ public class WebviewCommentBox extends Fragment {
             mWebView.destroy();
         }
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -80,8 +88,30 @@ public class WebviewCommentBox extends Fragment {
         killWebView(block);
     }
 
-    protected void setup_commentbox(String id) {
-        Fx9C.setup_commentbox(this, framer, block, betterCircleBar, id, 1600);
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        initBinding(view);
+        setup_commentbox("http://google.com");
     }
 
+
+    private void setup_commentbox(String url_in_full) {
+        Fx9C.setup_url_hypebrid(
+                this,
+                framer, block, betterCircleBar,
+                url_in_full, 2000,
+                getAllow(), getInternal(),
+                this);
+    }
+
+    @Override
+    public void triggerNative(Uri trigger_url) {
+
+    }
+
+    @Override
+    public boolean interceptUrl(String url, WebView wb) {
+        return In32.interceptURL_cart(url, getAllow(), getInternal(), this);
+    }
 }

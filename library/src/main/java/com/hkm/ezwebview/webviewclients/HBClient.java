@@ -24,7 +24,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hkm.ezwebview.Util.In32;
 import com.hkm.ezwebview.webviewleakfix.PreventLeakClient;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public abstract class HBClient extends PreventLeakClient<Activity> {
@@ -39,39 +43,16 @@ public abstract class HBClient extends PreventLeakClient<Activity> {
         mWebView = w;
     }
 
-    protected abstract void startNewActivity(final String packagename, final String url, final String brandname, final Context context);
-
-    protected abstract void startFeedList(final String url, final Context context);
-
-    protected abstract void openUri(final String url, final Context context);
-
     protected abstract void retrieveCookie(final String cookie_string);
+
+    protected boolean overridedefaultHBlogic(final String url, final Activity context) {
+        return false;
+    }
+
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
-        // url = "http://hypebeast.com/tags/coke";
-        if (Uri.parse(url).getHost().endsWith("store.hypebeast.com")) {
-            String[] list = getSegments(Uri.parse(url));
-            boolean brand = list[1].equalsIgnoreCase("brands");
-            String brandname = list[2];
-            startNewActivity("com.hypebeast.store", url, brandname, activity);
-            return true;
-        } else if (Uri.parse(url).getHost().endsWith("hypebeast.com")) {
-            String[] list = getSegments(Uri.parse(url));
-            String g = list[1];
-            if (g.equalsIgnoreCase("tags")) {
-                startFeedList(url, activity);
-                return true;
-            } else {
-                //  PBUtil.startNewArticle(url, activity);
-                return true;
-            }
-        } else if (Uri.parse(url).getHost().length() == 0) {
-            return true;
-        }
-        openUri(url, activity);
-        return true;
+        return overridedefaultHBlogic(url, activity) ? true : In32.interceptURL_HB(url, activity);
     }
 
     @Override
@@ -162,15 +143,6 @@ public abstract class HBClient extends PreventLeakClient<Activity> {
                     }
                 })
                 .create().show();
-    }
-
-    private String[] getSegments(final Uri base) {
-        String[] segments = base.getPath().split("/");
-        //  String idStr = segments[segments.length - 1];
-        //  int id = Integer.parseInt(idStr);
-        String token = base.getLastPathSegment();
-        Log.d(TAG, "got the token:" + token);
-        return segments;
     }
 
 

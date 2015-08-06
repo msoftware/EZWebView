@@ -13,6 +13,8 @@ import android.webkit.WebView;
 public class URLClient extends HBCart {
     public interface cb {
         void triggerNative(Uri trigger_url);
+
+        boolean interceptUrl(String url, WebView wb);
     }
 
     public static <T> URLClient with(
@@ -23,8 +25,8 @@ public class URLClient extends HBCart {
             return new URLClient(g, w);
         }
         if (context instanceof Fragment) {
-            AppCompatActivity g = (AppCompatActivity) context;
-            return new URLClient(g, w);
+            Fragment g = (Fragment) context;
+            return new URLClient(g.getActivity(), w);
         }
         if (context instanceof android.support.v4.app.Fragment) {
             android.support.v4.app.Fragment g = (android.support.v4.app.Fragment) context;
@@ -39,9 +41,19 @@ public class URLClient extends HBCart {
         super(context, fmWebView);
     }
 
+    public URLClient setCallBack(cb mxb) {
+        this.mxb = mxb;
+        return this;
+    }
 
     @Override
     protected void triggerNative(Uri trigger_url) {
         if (mxb != null) mxb.triggerNative(trigger_url);
+    }
+
+    @Override
+    protected boolean interceptUrl(WebView view, String url) {
+        if (mxb != null) return mxb.interceptUrl(url, view);
+        return false;
     }
 }

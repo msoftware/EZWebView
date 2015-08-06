@@ -1,5 +1,6 @@
 package com.hkm.ezwebview.webviewclients;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
 
@@ -9,7 +10,7 @@ import com.hkm.ezwebview.webviewleakfix.PreventLeakClient;
 /**
  * Created by hesk on 23/7/15.
  */
-public class FBClient<Main extends AppCompatActivity> extends PreventLeakClient {
+public class FBClient extends PreventLeakClient {
 
     private String loginCookie;
 
@@ -17,7 +18,7 @@ public class FBClient<Main extends AppCompatActivity> extends PreventLeakClient 
     public static String TAG = "hypebeastPathsWatcher";
     private String authCallback = "...";
 
-    public FBClient(Main context, WebView webview) {
+    public FBClient(Activity context, WebView webview) {
         super(context);
         mWebView = webview;
     }

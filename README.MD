@@ -53,20 +53,6 @@ This is the advanced implementation:
         final String contentc = fromFileRaw(getActivity(), R.raw.sample_html);
         try {
             Fx9C.setup_content_block_wb(this, content_article_frame, block, contentc, new HClient.Callback() {
-                @Override
-                public void startNewActivity(String packagename, String url, String brandname, Context context) {
-
-                }
-
-                @Override
-                public void startFeedList(String url, Context context) {
-
-                }
-
-                @Override
-                public void openUri(String url, Context context) {
-
-                }
 
                 @Override
                 public void retrieveCookie(String cookie_string) {

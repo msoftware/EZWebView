@@ -2,8 +2,10 @@ package com.hkm.ezwebviewsample;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RawRes;
@@ -18,6 +20,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.hkm.ezwebview.Util.Fx9C;
+import com.hkm.ezwebview.Util.In32;
 import com.hkm.ezwebview.webviewclients.HClient;
 import com.hkm.ezwebview.webviewleakfix.NonLeakingWebView;
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
@@ -81,18 +84,8 @@ public class basicWVIFragment extends Fragment {
         try {
             Fx9C.setup_content_block_wb(this, content_article_frame, block, contentc, new HClient.Callback() {
                 @Override
-                public void startNewActivity(String packagename, String url, String brandname, Context context) {
-
-                }
-
-                @Override
-                public void startFeedList(String url, Context context) {
-
-                }
-
-                @Override
-                public void openUri(String url, Context context) {
-
+                public boolean overridedefaultlogic(String url, Activity activity) {
+                    return In32.interceptURL_HB(url, activity);
                 }
 
                 @Override
