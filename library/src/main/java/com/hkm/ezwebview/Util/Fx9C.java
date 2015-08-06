@@ -43,10 +43,10 @@ public class Fx9C {
         h.postDelayed(new Runnable() {
             @Override
             public void run() {
-                ViewCompat.animate(view)
+                ViewCompat.animate(view).setDuration((long) timeinit)
                         .alpha(1f).withEndAction(callback);
             }
-        }, timeinit);
+        }, 80);
     }
 
     public static void startToReveal(final ViewGroup view, final int timeinit) {
@@ -56,10 +56,10 @@ public class Fx9C {
         h.postDelayed(new Runnable() {
             @Override
             public void run() {
-                ViewCompat.animate(view)
+                ViewCompat.animate(view).setDuration((long) timeinit)
                         .alpha(1f);
             }
-        }, timeinit);
+        }, 80);
     }
 
     private static <T> Activity with(T context) throws Exception {
@@ -68,8 +68,8 @@ public class Fx9C {
             return g;
         }
         if (context instanceof Fragment) {
-            AppCompatActivity g = (AppCompatActivity) context;
-            return g;
+            Fragment g = (Fragment) context;
+            return g.getActivity();
         }
         if (context instanceof android.support.v4.app.Fragment) {
             android.support.v4.app.Fragment g = (android.support.v4.app.Fragment) context;
@@ -85,7 +85,18 @@ public class Fx9C {
             final String codeing,
             final HClient.Callback c
     ) throws Exception {
-        setup_content_block_wb(context, frame_holder, block, codeing, 1500, c);
+        setup_content_block_wb(context, frame_holder, block, codeing, 1500, c, null);
+    }
+
+    public static <T> void setup_content_block_wb(
+            final T context,
+            final RelativeLayout frame_holder,
+            final NonLeakingWebView block,
+            final String codeing,
+            final HClient.Callback c,
+            final Runnable cb
+    ) throws Exception {
+        setup_content_block_wb(context, frame_holder, block, codeing, 1500, c, cb);
     }
 
     public static <T> void setup_web_video(
@@ -96,7 +107,19 @@ public class Fx9C {
             final String codeing,
             final HClient.Callback c
     ) throws Exception {
-        setup_web_video(context, frame_holder, block, circlebar, codeing, 2000, c);
+        setup_web_video(context, frame_holder, block, circlebar, codeing, 2000, c, null);
+    }
+
+    public static <T> void setup_web_video(
+            final T context,
+            final RelativeLayout frame_holder,
+            final NonLeakingWebView block,
+            final CircleProgressBar circlebar,
+            final String codeing,
+            final HClient.Callback c,
+            final Runnable cb
+    ) throws Exception {
+        setup_web_video(context, frame_holder, block, circlebar, codeing, 2000, c, cb);
     }
 
     private static <T> void setup_content_block_wb(
@@ -105,12 +128,16 @@ public class Fx9C {
             final NonLeakingWebView block,
             final String codeing,
             final int reveal_time,
-            final HClient.Callback c) throws Exception {
+            final HClient.Callback c,
+            final Runnable callback_webview) throws Exception {
         final String cs = In32.cssByContentPost(with(context)) + codeing;
         block.setWebViewClient(HClient.with(context, block).setController(c));
         block.loadDataWithBaseURL("", cs, "text/html; charset=utf-8", "UTF-8", null);
         block.setVisibility(View.VISIBLE);
-        startToReveal(frame_holder, reveal_time);
+        if (callback_webview == null)
+            startToReveal(frame_holder, reveal_time);
+        else
+            startToReveal(frame_holder, reveal_time, callback_webview);
     }
 
     private static <T> void setup_web_video(
@@ -118,8 +145,10 @@ public class Fx9C {
             final RelativeLayout frame_holder,
             final NonLeakingWebView mVideo,
             final CircleProgressBar circlebar,
-            final String codeing, final int reveal_time,
-            final HClient.Callback c) throws Exception {
+            final String codeing,
+            final int reveal_time,
+            final HClient.Callback c,
+            final Runnable callback_webview) throws Exception {
         final String embeded_code = In32.cssByVideo(with(context)) + codeing;
         mVideo.setWebChromeClient(new ChromeLoader(circlebar));
         mVideo.getSettings().setPluginState(WebSettings.PluginState.ON);
@@ -128,7 +157,10 @@ public class Fx9C {
         mVideo.getSettings().setJavaScriptEnabled(true);
         mVideo.loadDataWithBaseURL("", embeded_code, "text/html; charset=utf-8", "UTF-8", null);
         mVideo.setVisibility(View.VISIBLE);
-        startToReveal(frame_holder, reveal_time);
+        if (callback_webview == null)
+            startToReveal(frame_holder, reveal_time);
+        else
+            startToReveal(frame_holder, reveal_time, callback_webview);
     }
 
     public static void killWebView(NonLeakingWebView mWebView) {

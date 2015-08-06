@@ -30,8 +30,8 @@ public class HClient extends HBClient {
             return new HClient(g, w);
         }
         if (context instanceof Fragment) {
-            AppCompatActivity g = (AppCompatActivity) context;
-            return new HClient(g, w);
+            Fragment g = (Fragment) context;
+            return new HClient(g.getActivity(), w);
         }
         if (context instanceof android.support.v4.app.Fragment) {
             android.support.v4.app.Fragment g = (android.support.v4.app.Fragment) context;

@@ -6,6 +6,8 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RawRes;
+import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,8 @@ import com.hkm.ezwebview.Util.Fx9C;
 import com.hkm.ezwebview.webviewclients.HClient;
 import com.hkm.ezwebview.webviewleakfix.NonLeakingWebView;
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
+
+import java.util.Scanner;
 
 /**
  * Created by hesk on 6/8/15.
@@ -60,10 +64,20 @@ public class basicWVIFragment extends Fragment {
         return inflater.inflate(R.layout.webviewarticle, container, false);
     }
 
+    private static String fromFileRaw(Context ctx, final @RawRes int resource_raw_file_name) {
+        StringBuilder sb = new StringBuilder();
+        Scanner s = new Scanner(ctx.getResources().openRawResource(resource_raw_file_name));
+
+        while (s.hasNextLine()) {
+            sb.append(s.nextLine() + "\n");
+        }
+        return sb.toString();
+    }
+
     @Override
     public void onViewCreated(View v, Bundle b) {
         initBinding(v);
-        final String contentc = getString(R.string.demo_html_content);
+        final String contentc = fromFileRaw(getActivity(), R.raw.sample_html);
         try {
             Fx9C.setup_content_block_wb(this, content_article_frame, block, contentc, new HClient.Callback() {
                 @Override
@@ -84,6 +98,16 @@ public class basicWVIFragment extends Fragment {
                 @Override
                 public void retrieveCookie(String cookie_string) {
 
+                }
+            }, new Runnable() {
+                @Override
+                public void run() {
+                    ViewCompat.animate(mprogressbar).alpha(0f).withEndAction(new Runnable() {
+                        @Override
+                        public void run() {
+                            mprogressbar.setVisibility(View.GONE);
+                        }
+                    });
                 }
             });
         } catch (Exception e) {
