@@ -23,6 +23,58 @@ Dependency
     compile 'com.hkm.ezwebview:library:1.0.0'
 ```
 
+
+Step 1.
+======
+please locate in the xml for the video display 
+```xml
+
+                <RelativeLayout
+                    android:id="@+id/framevideoplayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_height_video"
+                    android:background="@color/main_background"
+                    android:padding="1dp"
+                    android:visibility="gone">
+
+                    <com.hkm.ezwebview.webviewleakfix.NonLeakingWebView
+                        android:id="@+id/videoplayer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@color/main_background"
+                        android:visibility="gone" />
+
+                    <com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar               xmlns:fab="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/progressloadingbarpx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        fab:mlpb_enable_circle_background="true"
+                        fab:mlpb_inner_radius="18dp"
+                        fab:mlpb_progress_color="@color/second_grey_bg"
+                        fab:mlpb_show_arrow="false" />
+                </RelativeLayout>
+```
+if you need to start a content display for html please also specify the xml as below:
+```xml
+   <RelativeLayout
+                    android:id="@+id/content_article_frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:visibility="gone">
+
+                    <com.hkm.ezwebview.webviewleakfix.NonLeakingWebView
+                        android:id="@+id/content_block"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        tool:ignore="WebViewLayout" />
+                </RelativeLayout>
+```
 This is the fast simple implementation without any callbacks:
 
 ```java
