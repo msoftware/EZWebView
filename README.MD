@@ -75,6 +75,10 @@ if you need to start a content display for html please also specify the xml as b
                         tool:ignore="WebViewLayout" />
                 </RelativeLayout>
 ```
+
+
+HTML content display area
+=======
 This is the fast simple implementation without any callbacks:
 
 ```java
@@ -131,8 +135,42 @@ This is the advanced implementation:
 
 
 ```
+Video embeded content display area
+=======
+```java
+ try {
+            CircleProgressBar bprogressbar = (CircleProgressBar)this.findViewById(R.id.progressloadingbarpx);
+            Fx9C.setup_web_video(
+                    this,
+                    video_frame,
+                    mVideo,
+                    bprogressbar,
+                    video_embed_code_webvoew,
+                    new HClient.Callback() {
+                        @Override
+                        public void startNewActivity(String s, String s1, String s2, Context context) {
 
+                        }
 
+                        @Override
+                        public void startFeedList(String s, Context context) {
+
+                        }
+
+                        @Override
+                        public void openUri(String s, Context context) {
+
+                        }
+
+                        @Override
+                        public void retrieveCookie(String s) {
+
+                        }
+                    }, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+```
 
 License
 --------
